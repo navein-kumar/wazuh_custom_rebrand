@@ -3,7 +3,7 @@ hosts:
       url: "https://wazuh.manager"
       port: 55000
       username: wazuh-wui
-      password: "MyS3cr37P450r.*-"
+      password: "CodesecSiemAdmin2023.*-"
       run_as: false
 
 customization.reports.footer: "Copyright © 2023 Codesecure Solutions"
