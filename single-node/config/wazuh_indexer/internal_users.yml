@@ -11,14 +11,14 @@ _meta:
 ## Demo users
 
 admin:
-  hash: "$2y$12$nHo17bmVzU41f29.BO2/1.39e0xZA5K2NepC01wDN1QtRfJtX4tbe"
+  hash: "$2y$12$RtmOm/kvDy7vh56adOb31.cAiIrGCUwnbsg9YbvRNM2Z9J1wOnlJK"
   reserved: true
   backend_roles:
   - "admin"
   description: "Demo admin user"
 
 kibanaserver:
-  hash: "$2y$12$nHo17bmVzU41f29.BO2/1.39e0xZA5K2NepC01wDN1QtRfJtX4tbe"
+  hash: "$2y$12$RtmOm/kvDy7vh56adOb31.cAiIrGCUwnbsg9YbvRNM2Z9J1wOnlJK"
   reserved: true
   description: "Demo kibanaserver user"
 
