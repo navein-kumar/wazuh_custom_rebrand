@@ -27,6 +27,8 @@ RUN bash config.sh
 # Add entrypoint
 ################################################################################
 FROM ubuntu:focal
+RUN apt-get update && apt install curl wget vim net-tools iputils-ping apt-transport-https lsb-release gnupg -y
+RUN apt-get update -y && apt-get install curl wget vim openssl xz-utils -y
 
 ENV USER="wazuh-indexer" \
     GROUP="wazuh-indexer" \
