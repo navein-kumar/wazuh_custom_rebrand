@@ -109,18 +109,18 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_custom_rebrand/single-node/wazuh_dashboard_config
+      device: /wazuh_docker/single-node/wazuh_dashboard_config
   wazuh_dashboard_custom:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_custom_rebrand/single-node/wazuh_dashboard_custom
+      device: /wazuh_docker/single-node/wazuh_dashboard_custom
 
   wazuh_index_snapshots:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_custom_rebrand/single-node/wazuh_index_snapshots
+      device: /wazuh_docker/single-node/wazuh_index_snapshots
 
