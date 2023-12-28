@@ -10,7 +10,7 @@ ARG FILEBEAT_CHANNEL=filebeat-oss
 ARG FILEBEAT_VERSION=7.10.2
 ARG WAZUH_FILEBEAT_MODULE
 
-RUN apt-get update && apt install curl wget vim  apt-transport-https lsb-release gnupg -y
+RUN apt-get update && apt install curl wget vim net-tools iputils-ping apt-transport-https lsb-release gnupg -y
 
 COPY config/check_repository.sh /
 
