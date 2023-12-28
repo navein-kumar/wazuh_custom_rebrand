@@ -24,7 +24,7 @@ RUN bash config.sh
 COPY config/install_wazuh_app.sh /
 RUN chmod 775 /install_wazuh_app.sh
 RUN bash /install_wazuh_app.sh
-RUN cd /usr/share/wazuh-dashboard/src/core/server/core_app/assets/ && wget  https://codesecure.in/img/codesecwhite.png -O Wazuh-Logo.svg
+RUN cd /usr/share/wazuh-dashboard/src/core/server/core_app/assets/ && wget  https://codesecure.in/img/codesecwhite.png -O Wazuh-Logo.svg &&  wget https://codesecure.in/img/codesec.svg -O loadlogo.svg
 RUN cd /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/ && mkdir -p custom/images/
 RUN cd /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/ && wget https://codesecure.in/img/codesec.png -O customization.logo.app.png 
 RUN cd /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/ && wget https://codesecure.in/img/codesec.png -O customization.logo.healthcheck.png
