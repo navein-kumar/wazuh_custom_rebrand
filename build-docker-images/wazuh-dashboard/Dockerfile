@@ -49,6 +49,9 @@ RUN mkdir -p $INSTALL_DIR/data/wazuh/logs && chown -R 101:101 $INSTALL_DIR/data/
 # Add wazuh_app_config
 ################################################################################
 FROM ubuntu:focal
+RUN apt-get update && apt install curl wget vim net-tools iputils-ping apt-transport-https lsb-release gnupg -y
+RUN apt-get update -y && apt-get install curl wget vim openssl xz-utils -y
+RUN apt-get update && apt install curl libcap2-bin xz-utils vim wget -y
 
 # Set environment variables
 ENV USER="wazuh-dashboard" \
