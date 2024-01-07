@@ -4,6 +4,8 @@ services:
     image: navinkr431/wazuh-manager:4.7.0
     hostname: wazuh.manager
     restart: always
+    networks:
+      - nginxproxy_nginx_proxy
     ulimits:
       memlock:
         soft: -1
@@ -32,7 +34,7 @@ services:
       - ./wazuh_logs:/var/ossec/logs
       - ./wazuh_queue:/var/ossec/queue
       - ./wazuh_var_multigroups:/var/ossec/var/multigroups
-      - ./wazuh_integrations:/var/ossec/integrations
+      - wazuh_integrations:/var/ossec/integrations
       - ./wazuh_active_response:/var/ossec/active-response/bin
       - ./wazuh_agentless:/var/ossec/agentless
       - ./wazuh_wodles:/var/ossec/wodles
@@ -47,6 +49,8 @@ services:
     image: navinkr431/wazuh-indexer:4.7.0
     hostname: wazuh.indexer
     restart: always
+    networks:
+      - nginxproxy_nginx_proxy
     ports:
       - "127.0.0.1:9200:9200"
     environment:
@@ -60,6 +64,7 @@ services:
         hard: 65536
     volumes:
       - wazuh_indexer_data:/var/lib/wazuh-indexer
+      - wazuh_indexer_config:/usr/share/wazuh-indexer
       - wazuh_index_snapshots:/mnt/snapshots
       - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem
       - ./config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.key
@@ -73,8 +78,10 @@ services:
     image: navinkr431/wazuh-dashboard:4.7.0
     hostname: wazuh.dashboard
     restart: always
+    networks:
+      - nginxproxy_nginx_proxy
     ports:
-      - 60086:5601
+      - "127.0.0.1:60086:5601"
     environment:
       - INDEXER_USERNAME=admin
       - INDEXER_PASSWORD=CodesecSiemAdmin2023
@@ -89,38 +96,47 @@ services:
       - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem
       - ./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
       - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
-      - wazuh_dashboard_config:/usr/share/wazuh-dashboard/data/wazuh/config
-      - wazuh_dashboard_custom:/usr/share/wazuh-dashboard/plugins
+      - wazuh_dashboard_config:/usr/share/wazuh-dashboard
+        # - wazuh_dashboard_custom:/usr/share/wazuh-dashboard/plugins
     depends_on:
       - wazuh.indexer
     links:
       - wazuh.indexer:wazuh.indexer
       - wazuh.manager:wazuh.manager
 
+networks:
+    nginxproxy_nginx_proxy:
+      external: true
 volumes:
   wazuh_indexer_data:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_custom_rebrand/single-node/wazuh_indexer_data
+      device: /root/nginxproxy/wazuh_docker/single-node/wazuh_indexer_data
+  wazuh_integrations:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /root/nginxproxy/wazuh_docker/single-node/wazuh_integrations
+
   wazuh_dashboard_config:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_docker/single-node/wazuh_dashboard_config
-  wazuh_dashboard_custom:
+      device: /root/nginxproxy/wazuh_docker/single-node/wazuh_dashboard_config
+  wazuh_indexer_config:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_docker/single-node/wazuh_dashboard_custom
+      device: /root/nginxproxy/wazuh_docker/single-node/wazuh_indexer_config
 
   wazuh_index_snapshots:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /wazuh_docker/single-node/wazuh_index_snapshots
-
+      device: /root/nginxproxy/wazuh_docker/single-node/wazuh_indexer_snapshots
