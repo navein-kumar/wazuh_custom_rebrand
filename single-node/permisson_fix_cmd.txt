@@ -1,0 +1,1 @@
+chown --reference=wazuh_indexer_data wazuh_indexer_snapshots
