@@ -3,5 +3,14 @@ hosts:
       url: "https://wazuh.master"
       port: 55000
       username: wazuh-wui
-      password: "MyS3cr37P450r.*-"
-      run_as: false
+      password: "CodesecSiemAdmin2023.*-"
+      run_as: true
+
+customization.reports.footer: "Copyright © 2023 Codesecure Solutions"
+customization.reports.header: "support@codesecure.in\nhttps://codesecure.in"
+wazuh.monitoring.creation: "m"
+customization.logo.healthcheck: "custom/images/customization.logo.healthcheck.png?v=1703483537919"
+customization.logo.app: "custom/images/customization.logo.app.png?v=1703483537929"
+customization.logo.sidebar: "custom/images/customization.logo.sidebar.png?v=1703483537953"
+customization.logo.reports: "custom/images/customization.logo.reports.png"
+cron.statistics.index.creation: "m"

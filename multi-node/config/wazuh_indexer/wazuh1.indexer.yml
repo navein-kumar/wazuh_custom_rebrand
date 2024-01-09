@@ -3,15 +3,14 @@ node.name: wazuh1.indexer
 cluster.initial_master_nodes:
         - wazuh1.indexer
         - wazuh2.indexer
-        - wazuh3.indexer
 cluster.name: "wazuh-cluster"
 discovery.seed_hosts:
         - wazuh1.indexer
         - wazuh2.indexer
-        - wazuh3.indexer
-node.max_local_storage_nodes: "3"
+node.max_local_storage_nodes: "2"
 path.data: /var/lib/wazuh-indexer
 path.logs: /var/log/wazuh-indexer
+path.repo: ["/mnt/snapshots"]
 plugins.security.ssl.http.pemcert_filepath: ${OPENSEARCH_PATH_CONF}/certs/wazuh1.indexer.pem
 plugins.security.ssl.http.pemkey_filepath: ${OPENSEARCH_PATH_CONF}/certs/wazuh1.indexer.key
 plugins.security.ssl.http.pemtrustedcas_filepath: ${OPENSEARCH_PATH_CONF}/certs/root-ca.pem
